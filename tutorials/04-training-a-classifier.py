@@ -11,12 +11,11 @@ transform = transforms.Compose([
 # Normalize(mean, std)
 
 trainset = torchvision.datasets.CIFAR10(
-    root='./data', 
+    root='../data', 
     train=True, 
     download=True, 
     transform=transform
 )
-print(trainset)
 trainloader = torch.utils.data.DataLoader(
     trainset, 
     batch_size=4, 
@@ -25,7 +24,7 @@ trainloader = torch.utils.data.DataLoader(
 )
 
 testset = torchvision.datasets.CIFAR10(
-    root='./data', 
+    root='../data', 
     train=False, 
     download=True, 
     transform=transform
@@ -78,6 +77,7 @@ class Net(nn.Module):
 
     def forward(self, x):
         # Max pooling over a (2, 2) window
+        print(x)
         x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
         # If the size is a square you can only specify a single number
         x = F.max_pool2d(F.relu(self.conv2(x)), 2)
